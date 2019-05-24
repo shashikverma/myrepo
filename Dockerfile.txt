@@ -1,0 +1,21 @@
+FROM  workstation.lab.example.com:5000/rhel7:7.3
+ADD training.repo  /etc/yum.repos.d/training.repo
+ADD rhel_dvd.repo  /etc/yum.repos.d/rhel_dvd.repo
+RUN  yum install  httpd -y && echo "hello" > /var/www/html/index.html
+RUN  sed -i "s/Listen 80/Listen 8080/g" /etc/httpd/conf/httpd.conf
+RUN chown apach:root /var/run/httpd  /var/log/httpd
+EXPOSE 8080
+USER apache
+ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD ["-D", "FOREGROUND"]
+
+vrealize  vro
+
+
+oc import-image myis --confirm \
+--from registry.acme.example.com:5000/acme/awesome --insecure
+
+
+CMD bash -c "while true; do echo test; sleep 5; done"
+
+oc cp frontend-1-zvjhb:/var/log/httpd/error_log /tmp/frontend-server.log
